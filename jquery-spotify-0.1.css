@@ -1,0 +1,125 @@
+/***
+ * CSS-File for JQuery Spotify extension
+ * Copyright (C) 2011 Alexander Forselius
+ * CURRENTLY EXPERIMENTAL!
+ * This is a work in progress, not intended for production use yet
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ * of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+.sp-list {
+	max-height: none !important;
+}
+
+.header p{
+	text-align: justify;
+	padding-right:15px;
+}
+.header{
+	min-height:48px;
+	padding:10px;
+}
+body
+{
+	min-height:100%;
+	margin:0px;
+	padding:0px;
+}
+*
+{
+	max-height:none;
+}
+section{
+}
+body{
+/*	background-image: url("img/bg.png");*/
+}
+/**
+ * 	Dividers like "Top Artists" on artist pages
+ */
+ .sp-divider{
+	background-color:#666666;
+/*	background-image: url("img/list_divider.png");*/
+	color:#FFFFFF;
+	padding-top:2px;
+	height:23px;
+	margin-bottom:15px;
+	padding-left:16px;
+	margin-top:15px;
+}
+/**
+ * 	For Spotify-toolbars like where the share button is it on playlist and artist view
+ */
+.sp-toolbar{
+	padding:3px;
+	box-shadow:inset 0px 0px 2px #000000, inset 0px 0px 1px #888888;
+	border:1px solid #111111;	
+	background: -webkit-gradient( linear,left bottom,	left top,	color-stop(0.26, rgb(0,0,0)),	color-stop(0.63, rgb(79,78,79)));
+}
+.sp-image{
+	box-shadow: 1px 1px 1px #000000;
+	background-color:#FFFFFF;
+	border: none;
+}
+.time{
+	font-size:50px;
+	margin:10px;
+	color:#111111;
+	text-shadow:0px -1px 1px #666666;
+	line-height:1em;
+	font-weight:bold;
+	}
+.flow li{
+	float:left;
+	margin:5px;
+}
+.flow{
+	list-style: none;
+}
+header{
+padding:13px;
+height:55px;
+background-color:#333333;
+border-bottom:1px solid #777777;
+/*
+box-shadow:inset 0px -1px 1px #353535, 0px 1px 3px #777777 ;
+*/
+}
+#cd{
+
+}
+.right{ 
+	float:right;
+	margin-top:22px;
+}
+.display{
+	background-color:#111111;
+	box-shadow: inset 0px 1px 5px #FFFFFF, inset 0px 0px 13px #000000, inset 0px 15px 0px #353535,inset 0px -15px 13px #555555;
+	padding:8px;
+	border-radius:12px;
+	font-size:23px;
+	color:#88ff88;
+	vertical-align:center;
+	
+}
+
+.controls button{
+	width:64px;
+	height:42px;
+	margin-right:12px;
+	margin-left:12px;
+}
