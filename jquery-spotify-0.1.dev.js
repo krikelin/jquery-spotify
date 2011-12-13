@@ -27,36 +27,117 @@
 
 function JSpotify(params){
 	this.api = getSpotifyApi(1);
-	this.m = api.require('sp://import/scripts/api/models');
-	this.v = api.require('sp://import/scripts/api/views');
-	
-	return obj;
+	this.m = this.api.require('sp://import/scripts/api/models');
+	this.v = this.api.require('sp://import/scripts/api/views');
+	this.coverflow = this.api.require("sp://import/scripts/coverflow");
+	this.popover = this.api.require("sp://import/scripts/popover");
+	/**
+	 * Used for the flow
+	 */
+	this.get_image = function(obj){
+		return obj.cover != 'undefined' ? obj.cover : (
+		obj.portrait != 'undefined' ? obj.portrait : (
+			obj.cover != 'undefined' ? obj.mosaic : (
+					""
+					
+				)
+				
+			)
+		)
+	};
 }
-var spot = new JSpotify();
-var jsp_v = spot.v;
-var jsp_m = spot.m;
+var __spot = new JSpotify();
+var jsp_v = __spot.v;
+var jsp_m = __spot.m;
 (function( $ ){
 	
 	/**
 	 * Method prototype
 	 */
 	var methods = {
+		button: function(options){
+			
+		},
+		/**
+		 * creates a popover
+		 * @param options {
+		 * 		node : DOMNodeList
+		 * }
+		 */
+		popover: function( options ){
+			
+			var popover = __spot.popover.popover(options);
+			var content = new Object();
+			content.contentNode = options.node; // Set contentnode
+			popover.setContent(content);
+			$(this).append(popover.node);
+			// TODO Add this
+		},
 		
 		/**
-		 * Creates a flow of a certain kind of content, like the recent artists section on the view
+		 * Creates a nice coverflow.
+		 * 
+		 * Options {
+		 * 	datasource: {
+		 * 	// Is a object that is an datasource. Must implement these functions:
+		 * 		makeNode : function(index){
+		 * 			// shall make a item
+		 * 			return {
+		 * 				dataset : { An array }
+		 * 	
+		 * 			}
+		 * 		}
+		 * }
+		 * 
+		 * }
+		 * }
+		 */
+		coverflow: function( options ){
+			var datasource = options.datasource;
+			var coverflow = new __spot.coverflow.Coverflow(datasource, options);
+			$(this).html("");
+			console.log(coverflow);
+			console.log($(this).get(0));
+			$(this).append(coverflow.node);
+			
+		},
+		/**
+		 * Creates a flow of a certain kind of content, like the similar artists section on the artists view
+		 * options { title : String, content :[m.views.Artist|Album|Playlist]}
 		 */
 		flow: function( options ){
 			var type = options.type;
 			var content = options.content; // Arrays of uris
+			
 			var scale = options.scale; // <scale>x<scale> size
 			var div = document.createElement("div");
-			
+		
 			for(var i=0; i < content.length; i++){
+				var obj = content[i]; // object, either an istance of 
+				var a = document.createElement("a");
 				var elm = document.createElement("span");
-				$(elm).addClass("span");
+				$(elm).addClass("sp-flow-item");
+				var img = document.createElement("img");
+				img.setAttribute("width", scale);
+				img.setAttribute("src", __spot.get_image(obj)); 
+				img.setAttribute("height", scale);
+				img.setAttribute("class", "sp-player-image");
+				a.setAttribute("href", obj.data.uri); // URI of the data
+				a.appendChild(elm);
+				a.appendChild(document.createElement("br")); // Add line break
+				if(options.text != 'undefined'){
+					var text = document.createElement("span");
+					$(text).html(options.text);
+					a.appendChild(text);
+				}
+				$(div).append(a);
 				
 				
 			}
+			var html = $(this).html();
+			$(this).html("");
+			$(this).append(div);
+		
 		},
 		
 		/**
@@ -160,7 +241,7 @@ var jsp_m = spot.m;
 	/**
 	 * Spotify prototype
 	 */
-	$.fn.Spotify = function(){
+	$.fn.Spotify = function( method ){
 		/**
 		 * Basic from http://docs.jquery.com/Plugins/Authoring
 		 */
